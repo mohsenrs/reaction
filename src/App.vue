@@ -1,17 +1,32 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <h1>Reaction Timer</h1>
+    <button @click="start" :disabled="isPlaying">play</button>
+    <Block v-if="isPlaying" :delay="delay" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Block from "./components/Block.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Block,
+  },
+  data() {
+    return {
+      delay: null,
+      isPlaying: false,
+    };
+  },
+  methods: {
+    start() {
+      this.delay = 2000 + Math.random() * 5000;
+      this.isPlaying = true;
+    },
+  },
+};
 </script>
 
 <style>
@@ -20,7 +35,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #444;
   margin-top: 60px;
 }
 </style>
